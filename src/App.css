@@ -1,0 +1,11 @@
+.card-wrapper {
+    display: flex;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width: 768) {
+  .card-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
