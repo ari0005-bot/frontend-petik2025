@@ -1,14 +1,11 @@
-const Profile = ({nama}) => {
+import "./Profile.css"
+
+const Profile = () => {
     return(
-        <div>
-            <h3>About Me</h3>
-            <ul>
-                Nama : {nama} 
-            </ul>
-            <p>Kedai Koppi bukan cuma soal kopi, tapi soal vibes.
+        <div className="about">
+            <p> <marquee>Kedai Koppi bukan cuma soal kopi, tapi soal vibes.
             Tempat nongkrong, ngobrol, mikir, atau sekadar diam sambil ngopi.
-            Datang sebagai tamu, pulang sebagai cerita.
-            </p>
+            Datang sebagai tamu, pulang sebagai cerita.</marquee></p>
         </div>
     );
 }

@@ -1,0 +1,72 @@
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  justify-items: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+  text-align: center;
+}
+
+.card-body h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #333;
+}
+
+.card-body p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+.btn-pesan {
+  padding: 10px 22px;
+  border: none;
+  background-color: #D9A75E;;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-pesan:hover {
+  background-color: #2F3E2B;
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+  .card img {
+    height: 150px;
+  }
+
+  .card-body h3 {
+    font-size: 16px;
+  }
+}

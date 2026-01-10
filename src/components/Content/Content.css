@@ -1,0 +1,22 @@
+.content {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.content h1 {
+  font-size: 36px;
+  color:  #2F3E2B;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+
+
+@media (max-width: 600px) {
+  .content h1 {
+    font-size: 28px;
+  }
+}
