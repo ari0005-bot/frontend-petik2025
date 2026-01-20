@@ -1,0 +1,54 @@
+import React, { useState } from 'react';
+import Navbar from '../../components/Navbar/Navbar.jsx';
+import Menu from '../../components/Menu/Menu.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
+
+import blackAroma from "../../components/img/Black Aroma.png";
+import moda from "../../components/img/moda.png"
+import taro from "../../components/img/taro.jpeg"
+import colBree from "../../components/img/coldBree.jpeg"
+
+const menuKopi = [
+  {
+    id: 1,
+    nama: "Kopi Aroma",
+    deskripsi: "Aroma kuat dan rasa seimbang",
+    gambar: blackAroma,
+  },
+  {
+    id: 2,
+    nama: "Kopi Moda",
+    deskripsi: "Rasa manis dan kafein tinggi",
+    gambar: moda,
+  },
+  {
+    id: 3,
+    nama: "Taro",
+    deskripsi: "Rasa khas yang tak akan terlupakan",
+    gambar: taro
+  },
+  {
+    id: 4,
+    nama: "Collbree",
+    deskripsi: "Dingin sampe badan badan",
+    gambar: colBree
+  }
+];
+
+const MenuPage = () => {
+  const [search, setSearch] = useState("");
+
+  const filteredMenu = menuKopi.filter((item) =>
+    item.nama.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className='body'>
+      <Navbar onSearch={setSearch} />
+      <Menu data={filteredMenu} />
+      <Footer nama="Ari(ARR TechZone)" />
+    </div>
+  );
+};
+
+export default MenuPage;

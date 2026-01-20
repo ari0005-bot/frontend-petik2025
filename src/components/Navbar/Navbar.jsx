@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = ({ onSearch }) => {
@@ -21,9 +22,15 @@ const Navbar = ({ onSearch }) => {
         onChange={handleSearchChange}
       />
       <ul className="nav-menu">
-        <li>Home</li>
-        <li>About</li>
-        <li>Login</li>
+        <li>
+          <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/menu" className={({isActive}) => isActive ? "active" : ""}>Menu</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" className={({isActive}) => isActive ? "active" : ""}>About</NavLink>
+        </li>
       </ul>
     </nav>
   );
