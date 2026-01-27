@@ -1,51 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar.jsx';
 import Menu from '../../components/Menu/Menu.jsx';
+import AddMenuForm from '../../components/AddMenuForm/AddMenuForm.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
-
-import blackAroma from "../../components/img/Black Aroma.png";
-import moda from "../../components/img/moda.png"
-import taro from "../../components/img/taro.jpeg"
-import colBree from "../../components/img/coldBree.jpeg"
-
-const menuKopi = [
-  {
-    id: 1,
-    nama: "Kopi Aroma",
-    deskripsi: "Aroma kuat dan rasa seimbang",
-    gambar: blackAroma,
-  },
-  {
-    id: 2,
-    nama: "Kopi Moda",
-    deskripsi: "Rasa manis dan kafein tinggi",
-    gambar: moda,
-  },
-  {
-    id: 3,
-    nama: "Taro",
-    deskripsi: "Rasa khas yang tak akan terlupakan",
-    gambar: taro
-  },
-  {
-    id: 4,
-    nama: "Collbree",
-    deskripsi: "Dingin sampe badan badan",
-    gambar: colBree
-  }
-];
+import useMenuData from '../../hooks/useMenuData.js';
+import './Menu.css';
 
 const MenuPage = () => {
-  const [search, setSearch] = useState("");
-
-  const filteredMenu = menuKopi.filter((item) =>
-    item.nama.toLowerCase().includes(search.toLowerCase())
-  );
+  const {
+    menuData,
+    search,
+    setSearch,
+    showForm,
+    addMenu,
+    toggleForm,
+    closeForm
+  } = useMenuData();
 
   return (
     <div className='body'>
-      <Navbar onSearch={setSearch} />
-      <Menu data={filteredMenu} />
+      <Navbar />
+      <div className="menu-header">
+        <button className="btn-add-menu" onClick={toggleForm}>
+          {showForm ? "Tutup Form" : "Tambah Menu Baru Klik From ini"}
+        </button>
+      </div>
+      
+      {showForm && <AddMenuForm onAddMenu={addMenu} onClose={closeForm} />}
+      
+      <Menu data={menuData} search={search} onSearch={setSearch} />
       <Footer nama="Ari(ARR TechZone)" />
     </div>
   );

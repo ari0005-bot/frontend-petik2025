@@ -96,6 +96,29 @@
   margin-bottom: 10px;
 }
 
+.menu-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.btn-add-menu {
+  background-color: #D9A75E;
+  color: #1E2B1E;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.btn-add-menu:hover {
+  background-color: #b8934f;
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .menu-header h1 {
     font-size: 2rem;
