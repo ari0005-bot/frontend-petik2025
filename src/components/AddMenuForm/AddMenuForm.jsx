@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AddMenuForm.css';
 
-const AddMenuForm = ({ onAddMenu, onClose }) => {
+const AddMenuForm = ({ onAddMenu }) => {
   const [formData, setFormData] = useState({
     nama: "",
     deskripsi: "",
@@ -21,7 +21,6 @@ const AddMenuForm = ({ onAddMenu, onClose }) => {
     if (formData.nama && formData.deskripsi && formData.gambar) {
       onAddMenu(formData);
       setFormData({ nama: "", deskripsi: "", gambar: "" });
-      onClose();
     }
   };
 
@@ -37,6 +36,7 @@ const AddMenuForm = ({ onAddMenu, onClose }) => {
             name="nama"
             value={formData.nama}
             onChange={handleInputChange}
+            placeholder="Masukkan nama menu"
             required
           />
         </div>
@@ -47,6 +47,7 @@ const AddMenuForm = ({ onAddMenu, onClose }) => {
             name="deskripsi"
             value={formData.deskripsi}
             onChange={handleInputChange}
+            placeholder="Masukkan deskripsi menu"
             required
           />
         </div>
@@ -63,10 +64,7 @@ const AddMenuForm = ({ onAddMenu, onClose }) => {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" className="btn-submit">Tambah</button>
-          <button type="button" className="btn-cancel" onClick={onClose}>
-            Batal
-          </button>
+          <button type="submit" className="btn-submit">Tambah Menu</button>
         </div>
       </form>
     </div>

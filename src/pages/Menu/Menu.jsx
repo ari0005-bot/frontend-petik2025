@@ -11,22 +11,14 @@ const MenuPage = () => {
     menuData,
     search,
     setSearch,
-    showForm,
-    addMenu,
-    toggleForm,
-    closeForm
+    addMenu
   } = useMenuData();
 
   return (
     <div className='body'>
       <Navbar />
-      <div className="menu-header">
-        <button className="btn-add-menu" onClick={toggleForm}>
-          {showForm ? "Tutup Form" : "Tambah Menu Baru Klik From ini"}
-        </button>
-      </div>
       
-      {showForm && <AddMenuForm onAddMenu={addMenu} onClose={closeForm} />}
+      <AddMenuForm onAddMenu={addMenu} />
       
       <Menu data={menuData} search={search} onSearch={setSearch} />
       <Footer nama="Ari(ARR TechZone)" />
