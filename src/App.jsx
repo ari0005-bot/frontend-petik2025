@@ -3,6 +3,7 @@ import './App.css'
 import Home from './pages/Home/Home.jsx'
 import Menu from './pages/Menu/Menu.jsx'
 import About from './pages/About/About.jsx'
+import CoffeeNews from './pages/CoffeeNews/CoffeeNews.jsx'
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
+        <Route path="/coffee-news" element={<CoffeeNews />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
