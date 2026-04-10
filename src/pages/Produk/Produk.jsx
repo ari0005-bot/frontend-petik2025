@@ -1,20 +1,45 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink, useNavigate, useOutletContext } from "react-router-dom";
 
 const Produk = () => {
+  const navigate = useNavigate();
   const [produk, setProduk] = useState([]);
+  const [kategori, setKategori] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const { search } = useOutletContext();
 
   useEffect(() => {
     getProduct();
+    getKategori();
   }, []);
 
   const getProduct = async () => {
     try {
       const result = await axios.get(`${import.meta.env.VITE_API_URL}/produk`);
       setProduk(result.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getKategoriNama = (id) => {
+    const kat = kategori.find(k => k.id === id);
+    return kat ? kat.nama : '-';
+  };
+
+  const formatRupiah = (amount) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const getKategori = async () => {
+    try {
+      const result = await axios.get(`${import.meta.env.VITE_API_URL}/jenis-produk`);
+      setKategori(result.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +88,7 @@ const Produk = () => {
               <th>Nama Barang</th>
               <th>Stok</th>
               <th>Minimal Stok</th>
+              <th>Harga</th>
               <th>Kategori</th>
               <th>Gambar</th>
               <th>Aksi</th>
@@ -77,12 +103,15 @@ const Produk = () => {
                   <td>{item.nama_barang}</td>
                   <td>{item.stok}</td>
                   <td>{item.min_stok}</td>
-                  <td>{item.jenis_produk_id}</td>
+                  <td>{formatRupiah(item.harga)}</td>
+                  <td>{getKategoriNama(item.jenis_produk_id)}</td>
                   <td>
                     <img src={item.url} alt="gambar" width={100} />
                   </td>
                   <td>
-                    <button>Edit</button>
+                    <button onClick={() => navigate(`/dashboard/produk/edit/${item.uuid}`)}>
+                      Edit
+                    </button>
                     <button onClick={() => handleDelete(item.uuid)}>
                       Delete
                     </button>
@@ -91,7 +120,7 @@ const Produk = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={7}>Data tidak ditemukan</td>
+                <td colSpan={8}>Data tidak ditemukan</td>
               </tr>
             )}
           </tbody>

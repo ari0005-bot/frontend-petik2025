@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink, Link, useOutletContext } from "react-router-dom";
 
 const Kartu = () => {
   const [kartu, setkartu] = useState([]);
@@ -81,7 +81,9 @@ const Kartu = () => {
                     <img src={item.url} alt="gambar" width={100} />
                   </td>
                   <td>
-                    <button>Edit</button>
+                    <Link to={`/dashboard/kartu/edit/${item.uuid}`}>
+                      <button>Edit</button>
+                    </Link>
                     <button onClick={() => handleDelete(item.uuid)}>
                       Delete
                     </button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink, Link, useOutletContext } from "react-router-dom";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -83,7 +83,6 @@ const Users = () => {
                     <img src={item.url} alt="gambar" width={100} />
                   </td>
                   <td>
-                    <button>Edit</button>
                     <button onClick={() => handleDelete(item.uuid)}>
                       Delete
                     </button>

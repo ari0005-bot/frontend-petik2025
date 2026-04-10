@@ -1,50 +1,58 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddKategori = () => {
+function EditKategori() {
   const navigate = useNavigate();
   const [namaKategori, setNamaKategori] = useState("");
   const [gambar, setGambar] = useState(null);
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const [errors, setErrors] = useState({});
+  const { uuid } = useParams();
+
+  useEffect(() => {
+    getCategoriesByUUID();
+  }, []);
+
+  const getCategoriesByUUID = async () => {
+    setLoading(true);
+    try {
+      const categories = await axios.get(
+        `${import.meta.env.VITE_API_URL}/jenis-produk/${uuid}`,
+      );
+
+      setNamaKategori(categories.data.data.nama);
+      setPreview(categories.data.data.url);
+    } catch (error) {
+      console.log(error.response);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrors({});
 
-    if (!namaKategori) {
-      alert("Nama kategori harus diisi!");
-      setLoading(false);
-      return;
-    }
-
     try {
-      const formData = new FormData();
-      formData.append("nama", namaKategori);
-
-      if (gambar) {
-        formData.append("gambar", gambar);
-      }
-
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/jenis-produk`,
-        formData,
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/jenis-produk/${uuid}`,
+        {
+          nama: namaKategori,
+          gambar,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
-      alert("Kategori berhasil ditambahkan!");
       navigate(-1);
     } catch (error) {
-      console.log("Error:", error.response?.data);
-      if (error.response?.data?.errors) {
-        setErrors(error.response.data.errors);
-      } else {
-        alert(
-          "Gagal menambahkan kategori: " +
-            (error.response?.data?.message || "Terjadi kesalahan"),
-        );
-      }
+      console.log(error.response);
     } finally {
       setLoading(false);
     }
@@ -59,7 +67,7 @@ const AddKategori = () => {
   return (
     <div>
       <div className="users-header">
-        <h3>Tambah Kategori</h3>
+        <h3>Edit Kategori</h3>
       </div>
       <form onSubmit={handleSubmit} className="from-wrapper">
         <div className="from-grid">
@@ -68,6 +76,7 @@ const AddKategori = () => {
             type="text"
             id="nama"
             placeholder="Contoh: Elektronik"
+            value={namaKategori}
             onChange={(e) => setNamaKategori(e.target.value)}
             required
           />
@@ -103,6 +112,6 @@ const AddKategori = () => {
       </form>
     </div>
   );
-};
+}
 
-export default AddKategori;
+export default EditKategori;

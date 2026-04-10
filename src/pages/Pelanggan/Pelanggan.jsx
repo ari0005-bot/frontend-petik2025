@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink, Link, useOutletContext } from "react-router-dom";
 
 const Pelanggan = () => {
   const [pelanggan, setPelanggan] = useState([]);
@@ -85,7 +85,9 @@ const Pelanggan = () => {
                   <td>{item.tgl_lahir}</td>
 
                   <td>
-                    <button>Edit</button>
+                    <Link to={`/dashboard/pelanggan/edit/${item.uuid}`}>
+                      <button>Edit</button>
+                    </Link>
                     <button onClick={() => handleDelete(item.uuid)}>
                       Delete
                     </button>
